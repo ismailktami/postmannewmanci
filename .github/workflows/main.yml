@@ -3,6 +3,20 @@ on:
   push:
     branches:
       - master
+
+  workflow_dispatch:
+    inputs:
+      environnement:
+        description: 'Environnement'
+        default: 'Preprod'
+        required: false
+     
+      publishReport:
+        description: 'PublishReport'
+        default: true
+        required: false
+
+
 jobs:
   test-api:
     runs-on: ubuntu-latest
