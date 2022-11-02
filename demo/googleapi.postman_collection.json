@@ -24,8 +24,7 @@
 						"exec": [
 							"pm.test(\"Status Code is 200\",function(){\r",
 							"    const jsonData = pm.response.json();\r",
-							"     pm.response.to.be.ok;\r",
-							"     pm.expect(jsonData.id).to.be.a(\"Number\");\r",
+							"     pm.expect(jsonData.id).to.be.a(\"String\");\r",
 							"})"
 						],
 						"type": "text/javascript"
@@ -59,7 +58,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status One Of 200 201 202\", () => {\r",
-							"  pm.expect(pm.response.code).to.be.oneOf([200,201,202]);\r",
+							"  pm.expect(pm.response.code).to.be.oneOf([400,401]);\r",
 							"});\r",
 							""
 						],
