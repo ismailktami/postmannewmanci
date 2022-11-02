@@ -7,41 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Get Post 1 From Google",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"const responseJson = pm.response.json();\r",
-							"pm.expect(responseJson.userId).to.eql(1);\r",
-							"pm.expect(responseJson.title).to.contains(\"sunt aut facere\");\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/posts/1",
-					"protocol": "https",
-					"host": [
-						"jsonplaceholder",
-						"typicode",
-						"com"
-					],
-					"path": [
-						"posts",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Get Post 2 From Google",
 			"event": [
 				{
@@ -96,12 +61,7 @@
 							"pm.test(\"Status One Of 200 201 202\", () => {\r",
 							"  pm.expect(pm.response.code).to.be.oneOf([200,201,202]);\r",
 							"});\r",
-							"\r",
-							"pm.test(\"Status Name\", () => {\r",
-							"  pm.expect(pm.response.status).to.be.eql(\"OK\");\r",
-							"  pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -137,15 +97,7 @@
 							"      const JsonHeaders=pm.response.headers;\r",
 							"      pm.response.to.have.header(\"X-Ratelimit-Reset\");\r",
 							"    \r",
-							"})\r",
-							"\r",
-							"pm.test(\"Check Headers Response has header value\",function(){\r",
-							"      const JsonHeaders=pm.response.headers;\r",
-							"      pm.expect(pm.response.headers.get(\"Server\")).to.eql(\"cloudflare\")\r",
-							"    \r",
-							"})\r",
-							"\r",
-							""
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -177,11 +129,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
-							"    console.log(response.json());\r",
-							"});\r",
-							"\r",
-							"\r",
 							"pm.test('Get All COmments OK',function(){\r",
 							"    pm.response.to.have.status(\"OK\");\r",
 							"    pm.expect(pm.response.code).to.be.eq(200);\r",
