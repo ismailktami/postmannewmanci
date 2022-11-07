@@ -1,0 +1,319 @@
+{
+	"info": {
+		"_postman_id": "1e4c3eb2-dc77-432c-8f1c-2769c51c55f8",
+		"name": "JSON Placeholder API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8252017"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "create posts",
+					"item": [
+						{
+							"name": "Create Post",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 2,\r\n    \"title\": \"add post userId 2\",\r\n    \"body\": \"Body post user id 2\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}{{postsEndpoint}}",
+									"host": [
+										"{{url}}{{postsEndpoint}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var schema = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"userId\": {",
+									"            \"type\": \"integer\"",
+									"        },",
+									"        \"id\": {",
+									"            \"type\": \"integer\"",
+									"        },",
+									"        \"title\": {",
+									"            \"type\": \"string\"",
+									"        },",
+									"        \"body\": {",
+									"            \"type\": \"string\"",
+									"        }",
+									"    },",
+									"    \"required\": [",
+									"        \"userId\",",
+									"        \"id\",",
+									"        \"title\",",
+									"        \"body\"",
+									"    ],",
+									"    \"additionalProperties\": false",
+									"};",
+									"pm.environment.set(\"postsSchema\", JSON.stringify(schema));"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "get posts",
+					"item": [
+						{
+							"name": "Get All Posts",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}{{postsEndpoint}}",
+									"host": [
+										"{{url}}{{postsEndpoint}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Post By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}{{postsEndpoint}}/10",
+									"host": [
+										"{{url}}{{postsEndpoint}}"
+									],
+									"path": [
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var schema = {",
+									"    \"type\": \"array\",",
+									"    \"items\": {",
+									"        \"type\": \"object\",",
+									"        \"properties\": {",
+									"            \"userId\": {",
+									"                \"type\": \"integer\"",
+									"            },",
+									"            \"id\": {",
+									"                \"type\": \"integer\"",
+									"            },",
+									"            \"title\": {",
+									"                \"type\": \"string\"",
+									"            },",
+									"            \"body\": {",
+									"                \"type\": \"string\"",
+									"            }",
+									"        },",
+									"        \"required\": [",
+									"            \"userId\",",
+									"            \"id\",",
+									"            \"title\",",
+									"            \"body\"",
+									"        ],",
+									"        \"additionalProperties\": false",
+									"    },",
+									"    \"additionalProperties\": false",
+									"};",
+									"pm.environment.set(\"postsSchema\", JSON.stringify(schema));"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "commentaires",
+			"item": [
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/comments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments By User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}{{postsEndpoint}}/1/comments",
+							"host": [
+								"{{url}}{{postsEndpoint}}"
+							],
+							"path": [
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "postsEndpoint",
+			"value": "/posts"
+		},
+		{
+			"key": "commentsEndpoint",
+			"value": "/comments"
+		},
+		{
+			"key": "albumsEndpoint",
+			"value": "/albums"
+		},
+		{
+			"key": "photosEndpoint",
+			"value": "/photos"
+		},
+		{
+			"key": "todosEndpoint",
+			"value": "/todos"
+		},
+		{
+			"key": "usersEndpoint",
+			"value": "/users"
+		}
+	]
+}

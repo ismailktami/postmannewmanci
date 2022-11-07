@@ -3,9 +3,13 @@ on:
   push:
     branches:
       - master
-
   workflow_dispatch:
     inputs:
+      api:        
+        description: 'Collection to execute'
+        default: 'jsonplaceholderapi'
+        required: false
+
       environnement:
         description: 'Environnement'
         default: 'Preprod'
@@ -15,7 +19,6 @@ on:
         description: 'PublishReport'
         default: true
         required: false
-
 
 jobs:
   test-api:
@@ -32,6 +35,7 @@ jobs:
       # Install the newman command line utility and also install the html extra reporter
       - name: Install newman
         run: |
+          npm install @types/newman --save
           npm install -g newman
           npm install -g newman-reporter-htmlextra
           npm install -g newman-reporter-junitfull
@@ -44,7 +48,7 @@ jobs:
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run demo/googleapi.postman_collection.json -r 'cli,junitfull,junitxray,htmlextra' --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html  --reporter-junitfull-export testResults/postman_echo_junitfull.xml  --reporter-junitxray-export testResults/resultxray.xml
+          newman run collections/jsonplaceholderapi/postman_collection.json -e collections/jsonplaceholderapi/postman_environment.json -r 'cli,junitfull,junitxray,htmlextra' --reporter-htmlextra-export testResults/htmlreport.html  --reporter-junitfull-export testResults/postman_echo_junitfull.xml  --reporter-junitxray-export testResults/resultxray.xml
 
       # Upload the contents of Test Results directory to workspace
       - name: Output the run Details
