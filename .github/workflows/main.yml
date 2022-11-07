@@ -1,4 +1,4 @@
-name: Test-Build
+name: Tests Postman
 on:
   push:
     branches:
@@ -27,7 +27,7 @@ on:
       
       request_timeout:
         description: 'Request timeout (ms)'
-        default: 1000
+        default: 500
         required: false  
 
       publishReport:
@@ -55,7 +55,7 @@ jobs:
           npm install -g newman-reporter-htmlextra
           npm install -g newman-reporter-junitfull
           npm install -g newman-reporter-junitxray
-
+          npm install -g newman-reporter-json-summary
       # Make directory to upload the test results
       - name: Make Directory for results
         run: mkdir -p testResults
@@ -68,7 +68,7 @@ jobs:
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run collections/jsonplaceholderapi/postman_collection.json -e collections/jsonplaceholderapi/postman_environment.json ${{ env.FOLDERS }} -r 'cli,junitfull,junitxray,htmlextra' --reporter-htmlextra-export testResults/htmlreport.html  --reporter-junitfull-export testResults/postman_echo_junitfull.xml  --reporter-junitxray-export testResults/resultxray.xml -n ${{ github.event.inputs.iterations || 1}}
+          newman run collections/jsonplaceholderapi/postman_collection.json -e collections/jsonplaceholderapi/postman_environment.json ${{ env.FOLDERS }} -r 'cli,junitfull,junitxray,htmlextra,json-summary' --reporter-htmlextra-export testResults/htmlreport.html  --reporter-junitfull-export testResults/postman_echo_junitfull.xml  --reporter-junitxray-export testResults/resultxray.xml  --reporter-summary-json-export  testResults/results.json  $reporters  --timeout-request  ${{ github.event.inputs.request_timeout || 500 }}  -n ${{ github.event.inputs.iterations || 1}}
 
       # Upload the contents of Test Results directory to workspace
       - name: Output the run Details
