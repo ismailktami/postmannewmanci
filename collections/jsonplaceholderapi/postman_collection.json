@@ -117,6 +117,15 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
 											"pm.test('Get all posts',function(){\r",
 											"    pm.expect(pm.response.code).to.be.oneOf([500]);\r",
 											"});"
