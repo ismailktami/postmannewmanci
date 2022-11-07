@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       api:        
-        description: 'Collection to execute'
+        description: 'Collection'
         default: 'jsonplaceholderapi'
         required: false
 
@@ -14,7 +14,17 @@ on:
         description: 'Environnement'
         default: 'Preprod'
         required: false
-     
+        
+      folders:
+        description: 'Folders'
+        default: ''
+        required: false     
+      
+      iterations:
+        description: 'Number of iterations to run'
+        default: 2
+        required: false     
+
       publishReport:
         description: 'PublishReport'
         default: true
@@ -48,7 +58,7 @@ jobs:
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run collections/jsonplaceholderapi/postman_collection.json -e collections/jsonplaceholderapi/postman_environment.json -r 'cli,junitfull,junitxray,htmlextra' --reporter-htmlextra-export testResults/htmlreport.html  --reporter-junitfull-export testResults/postman_echo_junitfull.xml  --reporter-junitxray-export testResults/resultxray.xml
+          newman run collections/jsonplaceholderapi/postman_collection.json -e collections/jsonplaceholderapi/postman_environment.json -r 'cli,junitfull,junitxray,htmlextra' --reporter-htmlextra-export testResults/htmlreport.html  --reporter-junitfull-export testResults/postman_echo_junitfull.xml  --reporter-junitxray-export testResults/resultxray.xml -n ${{ github.event.inputs.iterations || 1}}
 
       # Upload the contents of Test Results directory to workspace
       - name: Output the run Details
