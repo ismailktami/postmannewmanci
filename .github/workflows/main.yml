@@ -24,6 +24,11 @@ on:
         description: 'Number of iterations to run'
         default: 2
         required: false     
+      
+      request_timeout:
+        description: 'Request timeout (ms)'
+        default: 1000
+        required: false  
 
       publishReport:
         description: 'PublishReport'
