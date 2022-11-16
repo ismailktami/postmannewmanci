@@ -14,6 +14,11 @@ on:
         description: 'Environnement'
         default: 'Preprod'
         required: false
+        type: choice
+        options:
+          - Preprod
+          - Dev
+          - Rec
         
       folders:
         description: 'Folders'
