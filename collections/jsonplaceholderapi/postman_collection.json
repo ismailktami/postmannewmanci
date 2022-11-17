@@ -29,11 +29,13 @@
 									"script": {
 										"exec": [
 											"pm.test('Create post',function(){\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([500]);\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
 											"});\r",
 											"\r",
-											"pm.test('Create post2',function(){\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+											"pm.test('Verify Sttaus and userId',function(){\r",
+											"    pm.expect(pm.response.status).to.be.eq(\"Created\");\r",
+											"    pm.expect(pm.response.json()).to.include({\"userId\":2});\r",
+											"\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -127,7 +129,8 @@
 									"script": {
 										"exec": [
 											"pm.test('Get all posts',function(){\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([500]);\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+											"    pm.expect(pm.response.json()[0]).to.include({\"title\":\"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\"});\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -155,6 +158,7 @@
 										"exec": [
 											"pm.test('Get post by id',function(){\r",
 											"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+											"    pm.expect(pm.response.json()).to.include({\"id\":10});\r",
 											"});"
 										],
 										"type": "text/javascript"
